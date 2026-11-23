@@ -1,0 +1,20 @@
+from collections import deque
+
+class Solution:
+    def calPoints(self, operations: List[str]) -> int:
+        stack = deque()
+        for op in operations:
+            if op == "C":
+                stack.pop()
+            elif op == "D":
+                stack.append(2 * stack[-1])
+            elif op == "+":
+                stack.append(stack[-1] + stack[-2])
+            else:
+                stack.append(int(op))
+
+        total = 0
+        while len(stack) > 0:
+            total += stack.pop()
+        
+        return total
